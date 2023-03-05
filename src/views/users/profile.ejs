@@ -34,7 +34,7 @@
                 <%= user.name %> <%= user.surname %>
             </h4>
         </div>
-        <% if (user.admin == 1) { %>
+        <% if (user.admin === 1) { %>
             <div class="profile-is-admin">
                 <div class="link-box">
                     <a class="admin-link" href="/products/create">
@@ -62,7 +62,7 @@
             <h5 class="small-title">
                 <%= user.email %>
             </h5>
-            <% if (user.newsletter == 1) { %>
+            <% if (user.newsletter === 1) { %>
                 <p class="profile-newsletter">
                     Estas subscripto a nuestra newsletter
                 </p>
@@ -151,7 +151,7 @@
             <h3>
                 <%#= user.email %>
             </h3>
-            <%# if (user.newsletter == 1) { %>
+            <%# if (user.newsletter === 1) { %>
                 <h5>
                     Estás subscripto a nuestra newsletter
                 </h5>

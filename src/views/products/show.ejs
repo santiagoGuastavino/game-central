@@ -49,7 +49,7 @@
                     <p class="category-text">
                         <i 
                             class="<% game.platforms.forEach(platform => { %>
-                                <%= platform.title == 'WINDOWS' ? 'fab fa-windows' : null %>
+                                <%= platform.title === 'WINDOWS' ? 'fab fa-windows' : null %>
                             <% }) %>"
                         ></i>
                     </p>
@@ -58,7 +58,7 @@
                     <p class="category-text">
                         <i 
                             class="<% game.platforms.forEach(platform => { %>
-                                <%= platform.title == 'MAC OS' ? 'fab fa-apple' : null %>
+                                <%= platform.title === 'MAC OS' ? 'fab fa-apple' : null %>
                             <% }) %>"
                         ></i>
                     </p>
@@ -67,7 +67,7 @@
                     <p class="category-text">
                         <i 
                             class="<% game.platforms.forEach(platform => { %>
-                                <%= platform.title == 'LINUX' ? 'fab fa-linux' : null %>
+                                <%= platform.title === 'LINUX' ? 'fab fa-linux' : null %>
                             <% }) %>"
                         ></i>
                     </p>
@@ -76,7 +76,7 @@
                     <p class="category-text">
                         <i 
                             class="<% game.platforms.forEach(platform => { %>
-                                <%= platform.title == 'VR HEADSET' ? 'fas fa-vr-cardboard' : null %>
+                                <%= platform.title === 'VR HEADSET' ? 'fas fa-vr-cardboard' : null %>
                             <% }) %>"
                         ></i>
                     </p>
@@ -92,7 +92,7 @@
             </header>
         </section>
         <% game.status.forEach(status => { %>
-            <% if (status.name == 'IN OFFER') { %>
+            <% if (status.name === 'IN OFFER') { %>
                 <header class="show-title offer-title">
                     <h2 class="big-title">
                         ¡OFERTA ESPECIAL!
@@ -173,7 +173,7 @@
             </article>
         </section>
     </section>
-    <% if (locals.user && user.admin == 1) { %>
+    <% if (locals.user && user.admin === 1) { %>
         <header class="main-title admin-controls-title">
             <section class="admin-main-box">
                 <div class="admin-edit-box">

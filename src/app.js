@@ -1,92 +1,91 @@
-let express = require('express');
-let app = express();
-let path = require('path');
-let cors = require('cors');
+require('dotenv').config()
+const express = require('express')
+const app = express()
+const path = require('path')
+const cors = require('cors')
 
 // public y views path
-let publicPath = path.resolve('./public');
-let viewsPath = path.resolve('./src/views');
+const publicPath = path.resolve('./public')
+const viewsPath = path.resolve('./src/views')
 
 // set views
-app.set('view engine','ejs');
-app.set('views', viewsPath);
+app.set('view engine', 'ejs')
+app.set('views', viewsPath)
 
 // set PUT & DELETE, session & cookies
-let methodOverride = require('method-override');
-let session = require('express-session');
-let cookies = require('cookie-parser');
+const methodOverride = require('method-override')
+const session = require('express-session')
+const cookies = require('cookie-parser')
 
-// middlewares para: 
+// middlewares para:
 // public, req.body, PUT & DELETE, session & cookies, cors
-app.use(express.static(publicPath));
-app.use(express.urlencoded ({ extended:false }));
-app.use(express.json());
-app.use(methodOverride('_method'));
+app.use(express.static(publicPath))
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(methodOverride('_method'))
 app.use(session({
-    secret: 'session-secret',
-    resave: false,
-    saveUninitialized: true
-}));
-app.use(cookies());
-app.use(cors());
+  secret: 'session-secret',
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(cookies())
+app.use(cors())
 
 // middleware global
-let userAppMiddleware = require('./middlewares/userAppMiddleware'); // p/ etiquetas html y ETC
-let urlMiddleware = require('./middlewares/urlMiddleware'); // p/ obtener URL
+const userAppMiddleware = require('./middlewares/userAppMiddleware') // p/ etiquetas html y ETC
+const urlMiddleware = require('./middlewares/urlMiddleware') // p/ obtener URL
 
-app.use(userAppMiddleware);
-app.use(urlMiddleware);
+app.use(userAppMiddleware)
+app.use(urlMiddleware)
 
 // requiero ruteos
-let mainRouter = require('./routes/main');
-let productsRouter = require('./routes/products');
-let usersRouter = require('./routes/users');
+const mainRouter = require('./routes/main')
+const productsRouter = require('./routes/products')
+const usersRouter = require('./routes/users')
 
 // middlewares de rutas
 app.use(
-    '/',
-    mainRouter
-);
+  '/',
+  mainRouter
+)
 app.use(
-    '/products',
-    productsRouter
-);
+  '/products',
+  productsRouter
+)
 app.use(
-    '/users',
-    usersRouter
-);
+  '/users',
+  usersRouter
+)
 
 // requiero ruteos para API REST
-let apiMainRouter = require('./routes/api/main');
-let apiUsersRouter = require('./routes/api/users');
-let apiProductsRouter = require('./routes/api/products');
+const apiMainRouter = require('./routes/api/main')
+const apiUsersRouter = require('./routes/api/users')
+const apiProductsRouter = require('./routes/api/products')
 
 // middlewares de rutas API REST
 app.use(
-    '/api',
-    apiMainRouter
-);
+  '/api',
+  apiMainRouter
+)
 app.use(
-    '/api/users',
-    apiUsersRouter
-);
+  '/api/users',
+  apiUsersRouter
+)
 app.use(
-    '/api/products',
-    apiProductsRouter
-);
+  '/api/products',
+  apiProductsRouter
+)
 
 // middleware error 404 not found handling
 app.use((req, res, next) => {
-    res.status(404).render('error', {
-        status: 404,
-        title: 'ERROR',
-        errorDetail: 'Page Not Found'
-    });
-    next();
-});
+  res.status(404).render('error', {
+    status: 404,
+    title: 'ERROR',
+    errorDetail: 'Page Not Found'
+  })
+  next()
+})
 
 // levanto el server
-let port = process.env.PORT || 3001;
-app.listen(
-    port, () => console.log(`Servidor corriendo en el puerto ${port}`)
-);
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => console.log(`Server running @ ${PORT}`))

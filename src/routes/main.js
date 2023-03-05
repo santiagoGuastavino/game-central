@@ -1,26 +1,26 @@
-let express = require('express');
-let router = express.Router();
-let {
-    index,
-    termsConditions,
-    contact,
-    // processContact
-} = require('../controllers/mainController');
+const express = require('express')
+const router = express.Router()
+const {
+  index,
+  termsConditions,
+  contact
+  // processContact
+} = require('../controllers/mainController')
 
 router.get(
-    '/',
-    index
-);
+  '/',
+  index
+)
 
 router.get(
-    '/terms-conditions',
-    termsConditions
-);
+  '/terms-conditions',
+  termsConditions
+)
 
 router.get(
-    '/contact',
-    contact
-);
+  '/contact',
+  contact
+)
 
 // YET TO IMPLEMENT
 // router.post(
@@ -28,4 +28,4 @@ router.get(
 //     processContact
 // );
 
-module.exports= router;
+module.exports = router

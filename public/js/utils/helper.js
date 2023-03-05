@@ -1,4 +1,4 @@
-export let getCurrentUrl = () => {
-    let current = location.origin;
-    return current;
-};
+export const getCurrentUrl = () => {
+  const current = location.origin
+  return current
+}

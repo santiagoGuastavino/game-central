@@ -1,10 +1,10 @@
-let express = require('express');
-let router = express.Router();
-let { totals } = require('../../controllers/api/mainApiController');
+const express = require('express')
+const router = express.Router()
+const { totals } = require('../../controllers/api/mainApiController')
 
 router.get(
-    '/',
-    totals
-);
+  '/',
+  totals
+)
 
-module.exports = router;
+module.exports = router

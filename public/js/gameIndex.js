@@ -44,46 +44,46 @@
 // acá voy a armar prevent defaults etc limitando esas opciones.
 
 // ambos formularios
-let pageBack = document.querySelector('#page-back');
-let pageForward = document.querySelector('#page-forward');
+// acá uso una función para determinar el hostname, puede ser el localhost durante desarrollo o algún servidor en internet.
+import { getCurrentUrl } from './utils/helper.js'
+
+const pageBack = document.querySelector('#page-back')
+const pageForward = document.querySelector('#page-forward')
 
 // ambos botones
-let buttonBack = document.querySelector('#submit-back');
-let buttonForward = document.querySelector('#submit-forward');
+const buttonBack = document.querySelector('#submit-back')
+const buttonForward = document.querySelector('#submit-forward')
 
 // el pathname con el que voy a trabajar
-let pathName = window.location.pathname;
+const pathName = window.location.pathname
 
 // si no hay nada después de /products, checkeo que no sea 1 y deshabilito el botón para restar el paginado
 if (pathName.length === 9 || pathName.includes('1')) {
-    buttonBack.classList.add('change-page-button-disable');
-    pageBack.addEventListener('submit', (e) => {
-        e.preventDefault();
-    });
+  buttonBack.classList.add('change-page-button-disable')
+  pageBack.addEventListener('submit', (e) => {
+    e.preventDefault()
+  })
 };
-
-// acá uso una función para determinar el hostname, puede ser el localhost durante desarrollo o algún servidor en internet.
-import { getCurrentUrl } from './utils/helper.js';
-const currentUrl = getCurrentUrl();
+const currentUrl = getCurrentUrl()
 
 // si el pathName tiene algo más que /products, voy a almacenar el número del mismo, es decir, el parámetro y desde ahí evalúo hasta donde dejo sumar página
 if (pathName.length > 9) {
-    // regex para extraer número y lo hago INT
-    let param = parseInt(pathName.match(/\d+/)[0]);
-    // limit es la cantidad máxima de juegos que muestro por vista
-    let limit = 4;
-    // consulto a éste endpoint la cantidad de juegos
-    fetch(`${ currentUrl }/api`)
-        .then(res => res.json())
-        .then(data => {
-            let allGamesLength = data.totals.gameCount;
-            
-            if (Math.ceil(allGamesLength / limit) === param) {
-                buttonForward.classList.add('change-page-button-disable');
-                pageForward.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                });
-            };
+  // regex para extraer número y lo hago INT
+  const param = parseInt(pathName.match(/\d+/)[0])
+  // limit es la cantidad máxima de juegos que muestro por vista
+  const limit = 4
+  // consulto a éste endpoint la cantidad de juegos
+  fetch(`${currentUrl}/api`)
+    .then(res => res.json())
+    .then(data => {
+      const allGamesLength = data.totals.gameCount
+
+      if (Math.ceil(allGamesLength / limit) === param) {
+        buttonForward.classList.add('change-page-button-disable')
+        pageForward.addEventListener('submit', (e) => {
+          e.preventDefault()
         })
-        .catch(err => console.log(err));
+      };
+    })
+    .catch(err => console.log(err))
 };

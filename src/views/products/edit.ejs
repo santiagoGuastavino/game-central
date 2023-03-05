@@ -114,7 +114,7 @@
                             id="windows"
                             value="0"
                             <% editableGame.platforms.forEach(platform => { %>
-                                <%= platform.title == 'WINDOWS' ? 'checked' : null %>
+                                <%= platform.title === 'WINDOWS' ? 'checked' : null %>
                             <% }) %>
                         >
                     </label>
@@ -133,7 +133,7 @@
                             id="mac-os"
                             value="1"
                             <% editableGame.platforms.forEach(platform => { %>
-                                <%= platform.title == 'MAC OS' ? 'checked' : null %>
+                                <%= platform.title === 'MAC OS' ? 'checked' : null %>
                             <% }) %>
                         >
                     </label>
@@ -152,7 +152,7 @@
                             id="linux"
                             value="2"
                             <% editableGame.platforms.forEach(platform => { %>
-                                <%= platform.title == 'LINUX' ? 'checked' : null %>
+                                <%= platform.title === 'LINUX' ? 'checked' : null %>
                             <% }) %>
                         >
                     </label>
@@ -171,7 +171,7 @@
                             id="vr-headset"
                             value="3"
                             <% editableGame.platforms.forEach(platform => { %>
-                                <%= platform.title == 'VR HEADSET' ? 'checked' : null %>
+                                <%= platform.title === 'VR HEADSET' ? 'checked' : null %>
                             <% }) %>
                         >
                     </label>
