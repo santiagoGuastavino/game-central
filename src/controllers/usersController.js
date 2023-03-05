@@ -146,6 +146,7 @@ const usersController = {
 
   // GET: show users/:id view
   show: (req, res) => {
+    const dashboardLink = process.env.DASHBOARD_URL
     const user = req.session.loggedUser
     db.User.findByPk(user.id, {
       include: [
@@ -155,7 +156,8 @@ const usersController = {
       .then(loggedUser => {
         res.render('./users/profile', {
           title: loggedUser.name + ' ' + loggedUser.surname,
-          user: loggedUser
+          user: loggedUser,
+          dashboardLink
         })
       })
       .catch(err => {
